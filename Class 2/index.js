@@ -1,24 +1,20 @@
-require("dotenv").config();
+require('dotenv').config();
 
+// initiate express and app
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000
-const dbConnect = require("./config/database");
-const todoRoute = require('./routes/todoRoute')
+const PORT = process.env.PORT || 3000 
+const dbConnect = require("./config/dataBase");
+const router = require("./route/TodoRoute");
 
 app.use(express.json());
 
-// mount route
-app.use('/api/v1', todoRoute)
+app.use('/api/v1', router);
 
 
-// server start
-app.listen(PORT, () => console.log(`Server Started sucessfully at ${PORT}`))
-
-// Database Connection
+app.listen(PORT,() => console.log(`Server is running at port no : ${PORT}`))
 dbConnect();
+// default route
+app.get('/',(req,res) => res.send("This is Homepage!!"));
 
-// / default route
-app.get("/", (req,res) => {
-    res.send("This is HomePage!!!");
-})
+
