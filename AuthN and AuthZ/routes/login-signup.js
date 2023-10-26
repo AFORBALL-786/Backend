@@ -7,6 +7,7 @@ const {signup} = require('../controller/signup');
 const {auth} = require('../middleware/auth');
 const {isStudent} = require('../middleware/isStudent');
 const {isAdmin} = require('../middleware/isAdmin');
+const {getDetail} = require("../middleware/getDetail");
 
 // mapping
 router.post('/signup', signup);
@@ -33,6 +34,8 @@ router.get('/admin',auth, isAdmin, (req,res) => {
         message:"Welcome to the Protected route for Admin"
     })
 })
+
+router.get('/getuserdetail', auth, getDetail);
 
 // exports
 module.exports = router
